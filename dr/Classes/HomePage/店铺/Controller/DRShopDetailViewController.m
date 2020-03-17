@@ -39,9 +39,9 @@ NSString * const ShopHeaderCellId = @"ShopHeaderCellId";
 @implementation DRShopDetailViewController
 
 #pragma mark - 控制器的生命周期
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     [self scrollViewDidScroll:self.collectionView];
 }
 
@@ -71,6 +71,7 @@ NSString * const ShopHeaderCellId = @"ShopHeaderCellId";
     [self getGoodData];
     [self getAttentionData];
 }
+
 - (void)getShopData
 {
     if (!self.shopId) {
@@ -99,6 +100,7 @@ NSString * const ShopHeaderCellId = @"ShopHeaderCellId";
         DRLog(@"error:%@",error);
     }];
 }
+
 - (void)getGoodData
 {
     if (!self.shopId) {
@@ -149,6 +151,7 @@ NSString * const ShopHeaderCellId = @"ShopHeaderCellId";
         [self.footerView endRefreshing];
     }];
 }
+
 - (void)getAttentionData
 {
     if (!Token || !UserId || !self.shopId) {
@@ -176,6 +179,7 @@ NSString * const ShopHeaderCellId = @"ShopHeaderCellId";
         DRLog(@"error:%@",error);
     }];
 }
+
 - (void)attentionButonDidClick
 {
     if (!Token || !UserId || !self.shopModel.id) {

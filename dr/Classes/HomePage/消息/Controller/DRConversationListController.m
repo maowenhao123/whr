@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"消息中心";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"重新连接" style:UIBarButtonItemStylePlain target:self action:@selector(reconnection)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(reconnection)];
     self.delegate = self;
     self.dataSource = self;
     self.showRefreshHeader = YES;

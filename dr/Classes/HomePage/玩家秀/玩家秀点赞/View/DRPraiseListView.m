@@ -62,6 +62,11 @@ NSString * const PraiseListCollectionViewCellId = @"PraiseListCollectionViewCell
             long long endTime = [json[@"endTime"] longLongValue];
             self.timeInterval = (endTime - systemTime) / 1000;
             [self addSetDeadlineTimer];
+            
+            if (self.praiseList.count < 2) {
+                NSDictionary * objectDic = @{@"type": @(self.type)};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPraiseNoData" object:objectDic];
+            }
         }else
         {
             if (self.type == 1) {

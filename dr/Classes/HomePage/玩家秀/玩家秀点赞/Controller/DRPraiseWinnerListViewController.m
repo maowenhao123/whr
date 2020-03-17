@@ -55,9 +55,7 @@
             for (DRPraiseSectionModel * praiseSectionModel in praiseSectionList) {
                 NSInteger index = [praiseSectionList indexOfObject:praiseSectionModel];
                 NSArray *praiseList = [DRPraiseModel mj_objectArrayWithKeyValuesArray:json[@"list"][index][@"list"]];
-                if (praiseList.count >= 3) {
-                    praiseSectionModel.praiseList = [NSMutableArray arrayWithArray:praiseList];
-                }
+                praiseSectionModel.praiseList = [NSMutableArray arrayWithArray:praiseList];
             }
             NSMutableArray *oldPraiseList = self.dataArray[self.currentIndex];
             if ([headerView isRefreshing]) {
@@ -126,21 +124,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSMutableArray *praiseSectionList = self.dataArray[self.currentIndex];
-    DRPraiseSectionModel * praiseSectionModel = praiseSectionList[section];
-    if (praiseSectionModel.praiseList.count > 0) {
-        return praiseSectionModel.praiseList.count;
-    }else
-    {
-        return 1;
-    }
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *praiseSectionList = self.dataArray[self.currentIndex];
     DRPraiseSectionModel * praiseSectionModel = praiseSectionList[indexPath.section];
-    if (praiseSectionModel.praiseList.count > 0) {
+    if (praiseSectionModel.praiseList.count > indexPath.row) {
         DRPraiseListTableViewCell *cell = [DRPraiseListTableViewCell cellWithTableView:tableView];
         cell.delegate = self;
         cell.currentIndex = self.currentIndex;
@@ -154,6 +145,7 @@
         if(cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+            cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
             cell.backgroundColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.font = [UIFont systemFontOfSize:DRGetFontSize(32)];
@@ -196,7 +188,7 @@
     
     NSMutableArray *praiseSectionList = self.dataArray[self.currentIndex];
     DRPraiseSectionModel * praiseSectionModel = praiseSectionList[indexPath.section];
-    if (praiseSectionModel.praiseList.count > 0) {
+    if (praiseSectionModel.praiseList.count > indexPath.row) {
         DRUserShowViewController * showDetailVC = [[DRUserShowViewController alloc] init];
         DRPraiseModel *praiseModel = praiseSectionModel.praiseList[indexPath.row];
         showDetailVC.userId = praiseModel.userId;

@@ -28,7 +28,7 @@
     self.title = @"发布成功";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupChilds];
-    [self judgePraiseActivity];
+//    [self judgePraiseActivity];
 }
 
 - (void)judgePraiseActivity
@@ -88,19 +88,19 @@
     moneyLabel.frame = CGRectMake((screenWidth - moneyLabelSize.width) / 2, CGRectGetMaxY(paySuccessImageView.frame) + 30, moneyLabelSize.width, moneyLabelSize.height);
     [scrollView addSubview:moneyLabel];
     
-    //提示
-    CGFloat activityImageViewW = screenWidth;
-    CGFloat activityImageViewH = activityImageViewW / 375 * 150;
-    UIImageView * activityImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLabel.frame) + 30, activityImageViewW, activityImageViewH)];
-    self.activityImageView = activityImageView;
-    activityImageView.image = [UIImage imageNamed:@"show_praise_banner"];
-    activityImageView.hidden = YES;
-    [scrollView addSubview:activityImageView];
+//    //提示
+//    CGFloat activityImageViewW = screenWidth;
+//    CGFloat activityImageViewH = activityImageViewW / 375 * 150;
+//    UIImageView * activityImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLabel.frame) + 30, activityImageViewW, activityImageViewH)];
+//    self.activityImageView = activityImageView;
+//    activityImageView.image = [UIImage imageNamed:@"show_praise_banner"];
+//    activityImageView.hidden = YES;
+//    [scrollView addSubview:activityImageView];
     
     //按钮
     CGFloat buttonW = 118;
     CGFloat buttonH = 39;
-    CGFloat buttonY = CGRectGetMaxY(activityImageView.frame) + 40;
+    CGFloat buttonY = CGRectGetMaxY(moneyLabel.frame) + 40;
     CGFloat paddingButton = 60;
     CGFloat padding = (screenWidth - 2 * buttonW - paddingButton) / 2;
     for (int i = 0; i < 2; i++) {

@@ -28,6 +28,8 @@
 @property (nonatomic, weak) UIButton *selectedTopButton;//被选中的顶部按钮
 @property (nonatomic, weak) UIView * topBtnLine;
 @property (nonatomic, strong) NSArray *bannerArray;
+@property (nonatomic, assign) BOOL weekNoData;
+@property (nonatomic, assign) BOOL monthNoData;
 
 @end
 
@@ -40,16 +42,45 @@
         self.backgroundColor = [UIColor whiteColor];
         [self setupChildViews];
         [self getBannerData];
-        [self getNewData];
+//        [self getNewData];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPraiseActivityEnd) name:@"ShowPraiseActivityEnd" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(praiseNoData:) name:@"ShowPraiseNoData" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addShowSuccess) name:@"AddShowSuccess" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTableViewRefresh) name:@"ShowTableViewRefresh" object:nil];
     }
     return self;
 }
 
+#pragma mark - 通知
 - (void)addShowSuccess
 {
     [self topBtnClick:self.topBtnView.subviews[0]];
+}
+
+- (void)praiseNoData:(NSNotification *)note
+{
+    NSDictionary * objectDic = note.object;
+    
+    if ([objectDic[@"type"] intValue] == 0) {
+        self.weekNoData = YES;
+    }else if ([objectDic[@"type"] intValue] == 1)
+    {
+        self.monthNoData = YES;
+    }
+    
+    if (self.weekNoData && !self.monthNoData) {
+        self.praiseListScrollView.mj_offsetX = screenWidth;
+        self.praiseListScrollView.scrollEnabled = NO;
+        self.pageControl.hidden = YES;
+    }else if (!self.weekNoData && self.monthNoData)
+    {
+        self.praiseListScrollView.mj_offsetX = 0;
+        self.praiseListScrollView.scrollEnabled = NO;
+        self.pageControl.hidden = YES;
+    }else if (self.weekNoData && self.monthNoData)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPraiseActivityEnd" object:nil];
+    }
 }
 
 - (void)showPraiseActivityEnd
@@ -59,6 +90,13 @@
     self.topBtnView.y = CGRectGetMaxY(self.activityView.frame);
     self.height = CGRectGetMaxY(self.topBtnView.frame);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPraiseActivityEnd1" object:nil];
+}
+
+- (void)showTableViewRefresh
+{
+    [self getBannerData];
+    [self.weekPraiseListView getPraiseData];
+    [self.monthPraiseListView getPraiseData];
 }
 
 #pragma mark - 请求数据
@@ -138,29 +176,30 @@
     activityContentView.backgroundColor = [UIColor whiteColor];
     [activityView addSubview:activityContentView];
     
-    //金币
-    CGFloat newImageViewWH = 20;
-    UIImageView * newImageView = [[UIImageView alloc]init];
-    newImageView.image = [UIImage imageNamed:@"praise_new_icon"];
-    newImageView.frame = CGRectMake(DRMargin, (40 - newImageViewWH) / 2, newImageViewWH, newImageViewWH);
-    [activityContentView addSubview:newImageView];
-    
-    //轮播的文字
-    DRTitleCycleScrollView * titleCycleScrollView = [[DRTitleCycleScrollView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(newImageView.frame) + 5, 0, screenWidth - CGRectGetMaxX(newImageView.frame) - 5, 40) titleArray:nil animationDuration:2.5f];
-    self.titleCycleScrollView = titleCycleScrollView;
-    //点击事件
-    titleCycleScrollView.TapActionBlock = ^(NSInteger pageIndex){
-        
-    };
-    [activityContentView addSubview:titleCycleScrollView];
+//    //金币
+//    CGFloat newImageViewWH = 20;
+//    UIImageView * newImageView = [[UIImageView alloc]init];
+//    newImageView.image = [UIImage imageNamed:@"praise_new_icon"];
+//    newImageView.frame = CGRectMake(DRMargin, (40 - newImageViewWH) / 2, newImageViewWH, newImageViewWH);
+//    [activityContentView addSubview:newImageView];
+//
+//    //轮播的文字
+//    DRTitleCycleScrollView * titleCycleScrollView = [[DRTitleCycleScrollView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(newImageView.frame) + 5, 0, screenWidth - CGRectGetMaxX(newImageView.frame) - 5, 40) titleArray:nil animationDuration:2.5f];
+//    self.titleCycleScrollView = titleCycleScrollView;
+//    //点击事件
+//    titleCycleScrollView.TapActionBlock = ^(NSInteger pageIndex){
+//
+//    };
+//    [activityContentView addSubview:titleCycleScrollView];
     
     //分割线
-    UIView * lineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(titleCycleScrollView.frame), screenWidth, 10)];
+    UIView * lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 10)];
     lineView.backgroundColor = DRBackgroundColor;
     [activityContentView addSubview:lineView];
     
     //榜单人员
     UIScrollView *praiseListScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lineView.frame), screenWidth, 145)];
+    self.praiseListScrollView = praiseListScrollView;
     praiseListScrollView.delegate = self;
     praiseListScrollView.contentSize = CGSizeMake(screenWidth * 2, praiseListScrollView.height);
     praiseListScrollView.showsHorizontalScrollIndicator = NO;

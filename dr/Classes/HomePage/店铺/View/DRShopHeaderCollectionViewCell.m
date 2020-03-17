@@ -16,6 +16,7 @@
 @property (nonatomic,weak) UILabel * tagLabel;
 @property (nonatomic,weak) UILabel * detailLabel;
 @property (nonatomic,weak) UIView * lineView;
+@property (nonatomic,weak) UIStackView * stackView;
 @property (nonatomic,strong) NSMutableArray *labelArray;
 
 @end
@@ -100,12 +101,18 @@
         [backImageView addSubview:button];
     }
     
+    UIStackView * stackView = [[UIStackView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.attentionButton.frame) + 3, screenWidth, 30)];
+    self.stackView = stackView;
+    stackView.axis = UILayoutConstraintAxisHorizontal;
+    stackView.alignment = UIStackViewAlignmentFill;
+    stackView.distribution = UIStackViewDistributionFillEqually;
+    [self addSubview:stackView];
     for (int i = 0; i < 3; i++) {
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth / 3 * i, CGRectGetMaxY(self.attentionButton.frame) + 3, screenWidth / 3, 30)];
+        UILabel * label = [[UILabel alloc] init];
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:DRGetFontSize(26)];
         label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:label];
+        [stackView addArrangedSubview:label];
         [self.labelArray addObject:label];
     }
     
@@ -171,12 +178,15 @@
         UILabel * label = self.labelArray[i];
         if (i == 0) {
             label.text = [NSString stringWithFormat:@"宝贝%@", _shopModel.goodscount];
+            label.hidden = !_shopModel.goodscountShowable;
         }else if (i == 1)
         {
             label.text = [NSString stringWithFormat:@"销量%@", _shopModel.sellCount];
+            label.hidden = !_shopModel.sellCountShowable;
         }else if (i == 2)
         {
             label.text = [NSString stringWithFormat:@"关注人数%@", _shopModel.fansCount];
+            label.hidden = !_shopModel.fansCountShowable;
         }
     }
     
@@ -202,11 +212,8 @@
         self.attentionButton.y = CGRectGetMaxY(self.shopNameLabel.frame) + 10;
         self.chatButton.y = CGRectGetMaxY(self.shopNameLabel.frame) + 10;
     }
-    for (int i = 0; i < self.labelArray.count; i++) {
-        UILabel * label = self.labelArray[i];
-        label.y = CGRectGetMaxY(self.attentionButton.frame) + 3;
-        self.backImageView.height = CGRectGetMaxY(label.frame) + 3;
-    }
+    self.stackView.y = CGRectGetMaxY(self.attentionButton.frame) + 3;
+    self.backImageView.height = CGRectGetMaxY(self.stackView.frame) + 3;
     
     CGSize detailLabelSize = [self.detailLabel.attributedText boundingRectWithSize:CGSizeMake(screenWidth - 2 * DRMargin, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.detailLabel.frame = CGRectMake(DRMargin, CGRectGetMaxY(self.backImageView.frame), screenWidth - 2 * DRMargin, detailLabelSize.height + 16);

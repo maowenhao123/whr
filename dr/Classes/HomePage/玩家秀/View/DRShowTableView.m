@@ -332,6 +332,8 @@
     self.pageIndex = 1;
     self.headerRefreshing = YES;
     [self getData];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowTableViewRefresh" object:nil];
 }
 
 - (void)footerRefreshViewBeginRefreshing

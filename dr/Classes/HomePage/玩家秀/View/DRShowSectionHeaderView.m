@@ -73,12 +73,14 @@
     [avatarImageView addGestureRecognizer:userTap];
     
     //分享
-    CGFloat shareButtonWH = 45;
+    CGFloat shareButtonW = 80;
+    CGFloat shareButtonH = 45;
     UIButton * shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.shareButton = shareButton;
-    shareButton.frame = CGRectMake(screenWidth - 10 - shareButtonWH, avatarImageView.y, shareButtonWH, shareButtonWH);
+    shareButton.frame = CGRectMake(screenWidth - DRMargin - shareButtonW, 0, shareButtonW, shareButtonH);
     shareButton.centerY = self.avatarImageView.centerY;
     [shareButton setImage:[UIImage imageNamed:@"show_share"] forState:UIControlStateNormal];
+    shareButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [shareButton addTarget:self action:@selector(shareButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:shareButton];
     

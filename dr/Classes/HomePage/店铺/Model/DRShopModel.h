@@ -24,5 +24,8 @@
 @property (nonatomic, strong) NSNumber *freight;
 @property (nonatomic, strong) NSNumber *ruleMoney;
 @property (nonatomic,strong) NSArray <NSString *>*tags;
+@property (nonatomic, assign) BOOL goodscountShowable;
+@property (nonatomic, assign) BOOL sellCountShowable;
+@property (nonatomic, assign) BOOL fansCountShowable;
 
 @end

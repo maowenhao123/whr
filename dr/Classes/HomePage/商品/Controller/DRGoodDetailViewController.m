@@ -77,7 +77,6 @@ NSString * const GoodDetailRecommendGoodCellId = @"GoodDetailRecommendGoodCellId
 {
     [super viewWillAppear:animated];
     [self addSetDeadlineTimer];
-    [self scrollViewDidScroll:self.collectionView];
     if (self.videoFloatingWindow) {
         [self.videoFloatingWindow.playerView playVideo];
     }
