@@ -22,8 +22,8 @@
 		1D7BDF8723700B650015CD8E /* DRChooseGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BDF8623700B650015CD8E /* DRChooseGoodViewController.m */; };
 		1D7BDF8A23700B980015CD8E /* DRChooseGoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7BDF8923700B980015CD8E /* DRChooseGoodTableViewCell.m */; };
 		1D7C898D2305426A00D6F2B2 /* DRIdentityAuditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C898C2305426A00D6F2B2 /* DRIdentityAuditViewController.m */; };
-		1D80CCA7241F7BE30081B244 /* HyphenateLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D80CCA6241F7BE30081B244 /* HyphenateLite.framework */; };
-		1D80CCA8241F7BEC0081B244 /* HyphenateLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D80CCA6241F7BE30081B244 /* HyphenateLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1D80CCE1242076800081B244 /* HyphenateLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D80CCE0242076800081B244 /* HyphenateLite.framework */; };
+		1D80CCE22420768C0081B244 /* HyphenateLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D80CCE0242076800081B244 /* HyphenateLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D8D1A2822E80B02009185B2 /* DRPublishGoodMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D1A2722E80B02009185B2 /* DRPublishGoodMessageView.m */; };
 		1DABCE5222FAA582009C5D33 /* DRShoppingCarRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DABCE5122FAA582009C5D33 /* DRShoppingCarRecommendTableViewCell.m */; };
 		1DABCE5522FAAAE7009C5D33 /* DRGoodItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DABCE5422FAAAE7009C5D33 /* DRGoodItemView.m */; };
@@ -699,7 +699,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1D80CCA8241F7BEC0081B244 /* HyphenateLite.framework in Embed Frameworks */,
+				1D80CCE22420768C0081B244 /* HyphenateLite.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -738,7 +738,7 @@
 		1D7BDF8923700B980015CD8E /* DRChooseGoodTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRChooseGoodTableViewCell.m; sourceTree = "<group>"; };
 		1D7C898B2305426A00D6F2B2 /* DRIdentityAuditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRIdentityAuditViewController.h; sourceTree = "<group>"; };
 		1D7C898C2305426A00D6F2B2 /* DRIdentityAuditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRIdentityAuditViewController.m; sourceTree = "<group>"; };
-		1D80CCA6241F7BE30081B244 /* HyphenateLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HyphenateLite.framework; sourceTree = "<group>"; };
+		1D80CCE0242076800081B244 /* HyphenateLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HyphenateLite.framework; sourceTree = "<group>"; };
 		1D8D1A2622E80B02009185B2 /* DRPublishGoodMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRPublishGoodMessageView.h; sourceTree = "<group>"; };
 		1D8D1A2722E80B02009185B2 /* DRPublishGoodMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRPublishGoodMessageView.m; sourceTree = "<group>"; };
 		1DABCE5022FAA582009C5D33 /* DRShoppingCarRecommendTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRShoppingCarRecommendTableViewCell.h; sourceTree = "<group>"; };
@@ -2062,7 +2062,7 @@
 				AA8911AF1EFA61C00038EB2F /* Foundation.framework in Frameworks */,
 				AAA9284F1F91A5E400C52510 /* CoreFoundation.framework in Frameworks */,
 				AAA2C82F1F17D20D0046A335 /* libSocialQQ.a in Frameworks */,
-				1D80CCA7241F7BE30081B244 /* HyphenateLite.framework in Frameworks */,
+				1D80CCE1242076800081B244 /* HyphenateLite.framework in Frameworks */,
 				AA89127B1EFA6B3F0038EB2F /* CoreMotion.framework in Frameworks */,
 				AA2643581FC566BF000474F7 /* UMMobClick.framework in Frameworks */,
 				AA8912781EFA6A870038EB2F /* libcrypto.a in Frameworks */,
@@ -2981,7 +2981,7 @@
 		AA27E43921B7A4FA0067F72B /* HyphenateSDK */ = {
 			isa = PBXGroup;
 			children = (
-				1D80CCA6241F7BE30081B244 /* HyphenateLite.framework */,
+				1D80CCE0242076800081B244 /* HyphenateLite.framework */,
 			);
 			path = HyphenateSDK;
 			sourceTree = "<group>";
